@@ -1,7 +1,8 @@
 overblog_graphql:
     definitions:
         schema:
-            query: Query
+            mutation: RootMutation
+            query: RootQuery
         mappings:
             types:
                 -

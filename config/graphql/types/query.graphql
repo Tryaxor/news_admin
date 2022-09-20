@@ -1,0 +1,7 @@
+type RootQuery {
+  author(id: ID!): User
+  user: [User!]!
+  findArticleByAuthor(name: String!): [Article!]!
+  article: [Article!]!
+  article(id: ID!): Article
+}

@@ -1,0 +1,17 @@
+type Article {
+    id: ID!
+    title: String!
+    body: String!
+    validated: Boolean!
+    created_at: \DateTime!
+    updated_at: \DateTime!
+    author: User!
+}
+
+input UpdateArticle {
+    title: String!
+    body: String!
+    created_at: \DateTime!
+    updated_at: \DateTime!
+    author: User!
+}
