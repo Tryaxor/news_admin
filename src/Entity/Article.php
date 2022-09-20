@@ -141,4 +141,28 @@ class Article
     {
         $this->viewed->removeElement($viewedBy);
     }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getViewed(): Collection
+    {
+        return $this->viewed;
+    }
+
+    public function addViewed(User $viewed): self
+    {
+        if (!$this->viewed->contains($viewed)) {
+            $this->viewed->add($viewed);
+        }
+
+        return $this;
+    }
+
+    public function removeViewed(User $viewed): self
+    {
+        $this->viewed->removeElement($viewed);
+
+        return $this;
+    }
 }

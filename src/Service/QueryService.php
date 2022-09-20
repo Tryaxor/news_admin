@@ -6,8 +6,8 @@ namespace App\Service;
 // use App\Entity\Book;
 use App\Entity\Article;
 use App\Entity\User;
-// use App\Repository\AuthorRepository;
-// use App\Repository\BookRepository;
+use App\Repository\AuthorRepository;
+use App\Repository\BookRepository;
 
 use App\Repository\UserRepository;
 use App\Repository\ArticleRepository;
