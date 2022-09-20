@@ -1,4 +1,3 @@
 type RootMutation {
-  createAuthor(author: CreateUser!): User!
-  updateArticle(id: ID!, article: UpdateArticle!): Article!
+  updateArticle(id: ID!): Article!
 }

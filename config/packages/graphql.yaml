@@ -6,6 +6,6 @@ overblog_graphql:
         mappings:
             types:
                 -
-                    type: yaml
+                    type: graphql
                     dir: "%kernel.project_dir%/config/graphql/types"
                     suffix: null

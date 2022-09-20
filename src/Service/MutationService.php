@@ -2,47 +2,51 @@
 
 namespace App\Service;
 
-use App\Entity\Author;
-use App\Entity\Book;
+use App\Entity\Article;
+use App\Entity\User;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\Error;
 
-class MutationService 
+class MutationService
 {
     public function __construct(
         private EntityManagerInterface $manager
     ) {}
 
-    // public function createAuthor(array $authorDetails): Author 
-    // {
-    //     $author = new Author(
-    //         $authorDetails['name'],
-    //         DateTime::createFromFormat('d/m/Y', $authorDetails['dateOfBirth']),
-    //         $authorDetails['bio']
-    //     );
+    public function createArticle(array $articleDetails): Article
+    {
+        $user = $this->manager->getRepository(User::class)->find($articleDetails['user_id']);
+        $article = new Article(
+            $articleDetails['title'],
+            $articleDetails['body'],
+            $articleDetails['validated'],
+            new DateTime(),
+            new DateTime(),
+            $user
+        );
 
-    //     $this->manager->persist($author);
-    //     $this->manager->flush();
+        $this->manager->persist($article);
+        $this->manager->flush();
 
-    //     return $author;
-    // }
+        return $article;
+    }
 
-    // public function updateBook(int $bookId, array $newDetails): Book 
-    // {
-    //     $book = $this->manager->getRepository(Book::class)->find($bookId);
+    public function updateArticle(int $articleId, array $newDetails): Article
+    {
+        $article = $this->manager->getRepository(Article::class)->find($articleId);
 
-    //     if (is_null($book)) {
-    //         throw new Error("Could not find book for specified ID");
-    //     }
+        if (is_null($article)) {
+            throw new Error("Could not find article for specified ID");
+        }
 
-    //     foreach ($newDetails as $property => $value) {
-    //         $book->$property = $value;
-    //     }
+        foreach ($newDetails as $property => $value) {
+            $article->$property = $value;
+        }
 
-    //     $this->manager->persist($book);
-    //     $this->manager->flush();
+        $this->manager->persist($article);
+        $this->manager->flush();
 
-    //     return $book;
-    // }
+        return $article;
+    }
 }

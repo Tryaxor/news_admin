@@ -1,20 +1,18 @@
 type User {
     id: ID!
     email: String!
-    role: String!!
+    role: String!
     password: String!
-    created_at: \DateTime!
-    updated_at: \DateTime!
     is_active: Boolean!
-    email_validated:Boolean!
-    articles:[Article!]
+    email_validated: Boolean!
     username: String!
-    salt:String!
+    salt: String!
+    articles: [Article!]
 }
 
 input CreateUser {
     email: String!
-    role: String!!
+    role: String!
     password: String!
     username: String!
 }

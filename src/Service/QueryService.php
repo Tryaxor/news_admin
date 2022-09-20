@@ -17,27 +17,9 @@ use Doctrine\Common\Collections\Collection;
 class QueryService
 {
     public function __construct(
-        private UserRepository $authorRepository,
-        private ArticleRepository   $userRepository,
+        private UserRepository $userRepository,
+        private ArticleRepository $articleRepository,
     ) {
-    }
-
-    // public function findAuthor(int $authorId): ?Author
-    // {
-    //     return $this->authorRepository->find($authorId);
-    // }
-
-    // public function getAllAuthors(): array
-    // {
-    //     return $this->authorRepository->findAll();
-    // }
-
-    public function findBooksByAuthor(string $userName): Collection
-    {
-        return $this
-            ->authorRepository
-            ->findOneBy(['name' => $userName])
-            ->getArticles();
     }
 
     public function findAllArticles(): array
