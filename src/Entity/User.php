@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use DateTime;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -31,10 +32,10 @@ class User
     private ?string $password;
 
     #[ORM\Column(type: 'datetime')]
-    private ?\DateTimeImmutable $created_at;
+    private ?\DateTime $created_at;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
-    private ?\DateTimeImmutable $updated_at = null;
+    private ?\DateTime $updated_at = null;
 
     #[ORM\Column(type: 'boolean')]
     private ?bool $is_active;
@@ -57,20 +58,22 @@ class User
     public function __construct(
         string $username,
         string $email,
-        DateTimeInterface $created_at,
-        DateTimeInterface $updated_at,
+        DateTime $created_at,
+        DateTime $updated_at,
         bool $is_active,
         bool $email_validated,
     )
     {
-        $this->$username = $username;
-        $this->$email = $email;
-        $this->$created_at = $created_at;
-        $this->$updated_at = $updated_at;
-        $this->$is_active = $is_active;
-        $this->$email_validated = $email_validated;
+        $this->username = $username;
+        $this->email = $email;
+        $this->created_at = $created_at;
+        $this->updated_at = $updated_at;
+        $this->is_active = $is_active;
+        $this->email_validated = $email_validated;
         $this->articles = new ArrayCollection();
         $this->viewed_articles = new ArrayCollection();
+        $this->password = 'admin';
+        $this->salt = 'admin';
     }
 
     public function getId(): ?int

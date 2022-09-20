@@ -27,12 +27,12 @@ class Article
     private ?bool $validated;
 
     #[ORM\Column(type: 'datetime')]
-    private ?\DateTimeImmutable $created_at;
+    private ?\DateTime $created_at;
 
     #[ORM\Column(type: 'datetime')]
-    private ?\DateTimeImmutable $updated_at;
+    private ?\DateTime $updated_at;
 
-    #[ORM\ManyToOne(inversedBy: 'articles')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'articles')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $author;
 
@@ -43,16 +43,18 @@ class Article
         string $title,
         string $body,
         bool $validated,
-        DateTimeInterface $created_at,
-        DateTimeInterface $updated_at
+        \DateTime $created_at,
+        \DateTime $updated_at,
+        User $user
     )
     {
-        $this->$title = $title;
-        $this->$body = $body;
-        $this->$validated = $validated;
-        $this->$created_at = $created_at;
-        $this->$updated_at = $updated_at;
+        $this->title = $title;
+        $this->body = $body;
+        $this->validated = $validated;
+        $this->created_at = $created_at;
+        $this->updated_at = $updated_at;
         $this->viewed = new ArrayCollection();
+        $this->author = $user;
     }
 
     public function getId(): ?int

@@ -4,11 +4,12 @@ namespace App\DataFixtures;
 
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 use Faker\Generator;
 
-class AuthorFixtures extends Fixture
+class AuthorFixtures extends Fixture implements OrderedFixtureInterface
 {
 
     public const REFERENCE = 'AUTHORS_REFERENCE';
@@ -45,5 +46,10 @@ class AuthorFixtures extends Fixture
             $this->faker->boolean(),
             $this->faker->boolean()
         );
+    }
+
+    public function getOrder(): int
+    {
+        return 1; // smaller means sooner
     }
 }

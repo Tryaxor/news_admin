@@ -7,8 +7,9 @@ use Doctrine\Persistence\ObjectManager;
 use Faker\Generator;
 use Faker\Factory;
 use App\Entity\Article;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
-class ArticlesFixtures extends Fixture
+class ArticlesFixtures extends Fixture implements OrderedFixtureInterface
 {
 
     private Generator $faker;
@@ -47,10 +48,9 @@ class ArticlesFixtures extends Fixture
             $this->faker->title(),
             $this->faker->sentences(5, true),
             $this->faker->boolean(),
-            $this->faker->date_create(),
-            $this->faker->date_create(),
-            $this->getReference(AuthorFixtures::REFERENCE),
-
+            $this->faker->dateTime(),
+            $this->faker->dateTime(),
+            $this->getReference(AuthorFixtures::REFERENCE)
         );
     }
 
@@ -59,5 +59,10 @@ class ArticlesFixtures extends Fixture
         return [
             AuthorFixtures::class,
         ];
+    }
+
+    public function getOrder(): int
+    {
+        return 10; // smaller means sooner
     }
 }
